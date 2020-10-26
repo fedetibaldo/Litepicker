@@ -452,9 +452,15 @@ export class Litepicker extends Calendar {
         if (this.options.singleMode && this.datePicked.length) {
           this.setDate(this.datePicked[0]);
           this.hide();
-        } else if (!this.options.singleMode && this.datePicked.length === 2) {
-          this.setDateRange(this.datePicked[0], this.datePicked[1]);
-          this.hide();
+        } else if (!this.options.singleMode) {
+          if (this.datePicked.length === 2) {
+            this.setDateRange(this.datePicked[0], this.datePicked[1]);
+            this.hide();
+          } else {
+            if (typeof this.options.onSelect === 'function') {
+              this.options.onSelect.call(this, this.datePicked[0], null);
+            }
+          }
         }
       }
       return;
