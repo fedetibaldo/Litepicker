@@ -458,7 +458,8 @@ export class Litepicker extends Calendar {
             this.hide();
           } else {
             if (typeof this.options.onSelect === 'function') {
-              this.options.onSelect.call(this, this.datePicked[0], null);
+              let startDate = this.datePicked[0].clone() as DateTime;
+              this.options.onSelect.call(this, startDate.getDateInstance(), null);
             }
           }
         }
